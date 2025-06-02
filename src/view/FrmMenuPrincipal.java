@@ -28,15 +28,56 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuProdutos = new javax.swing.JMenuItem();
+        jMenuCategorias = new javax.swing.JMenuItem();
+        jMenuEntradaSaida = new javax.swing.JMenuItem();
+        jMenuRelatorios = new javax.swing.JMenuItem();
+        jMenuSair = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Principal ");
 
-        jMenu1.setText("File");
+        jMenu1.setText("Menu");
+
+        jMenuProdutos.setText("Produtos");
+        jMenuProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuProdutosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuProdutos);
+
+        jMenuCategorias.setText("Categorias ");
+        jMenuCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCategoriasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuCategorias);
+
+        jMenuEntradaSaida.setText("Entrada/Saída");
+        jMenuEntradaSaida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuEntradaSaidaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuEntradaSaida);
+
+        jMenuRelatorios.setText("Relatórios ");
+        jMenu1.add(jMenuRelatorios);
+
+        jMenuSair.setText("Sair");
+        jMenuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSairActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuSair);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Sobre");
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -54,6 +95,22 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProdutosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuProdutosActionPerformed
+
+    private void jMenuEntradaSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEntradaSaidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuEntradaSaidaActionPerformed
+
+    private void jMenuCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCategoriasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuCategoriasActionPerformed
+
+    private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -94,5 +151,10 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuCategorias;
+    private javax.swing.JMenuItem jMenuEntradaSaida;
+    private javax.swing.JMenuItem jMenuProdutos;
+    private javax.swing.JMenuItem jMenuRelatorios;
+    private javax.swing.JMenuItem jMenuSair;
     // End of variables declaration//GEN-END:variables
 }
