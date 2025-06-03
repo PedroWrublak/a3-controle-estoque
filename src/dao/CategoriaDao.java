@@ -4,7 +4,7 @@ import model.Categoria;
 import model.Produto;
 import java.sql.*;
 import java.util.ArrayList;
-// teste
+
 public class CategoriaDao {
 
     public ArrayList<Categoria> listaDeCategoria = new ArrayList<>();
