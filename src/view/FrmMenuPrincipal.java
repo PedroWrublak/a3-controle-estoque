@@ -39,6 +39,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         setTitle("Menu Principal ");
 
         jMenu1.setText("Menu");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
 
         jMenuProdutos.setText("Produtos");
         jMenuProdutos.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +102,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProdutosActionPerformed
-        // TODO add your handling code here:
+        FrmCadastroProdutos objeto = new FrmCadastroProdutos();        // TODO add your handling code here:
+        objeto.setVisible(true);
     }//GEN-LAST:event_jMenuProdutosActionPerformed
 
     private void jMenuEntradaSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEntradaSaidaActionPerformed
@@ -111,6 +117,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuSairActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+       FrmCadastroProduto objeto = new FrmCadastroProduto();
+objeto.setVisible(true);
+    }//GEN-LAST:event_jMenu1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,4 +168,14 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuRelatorios;
     private javax.swing.JMenuItem jMenuSair;
     // End of variables declaration//GEN-END:variables
+
+    private static class FrmCadastroProduto {
+
+        public FrmCadastroProduto() {
+        }
+
+        private void setVisible(boolean b) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+    }
 }
