@@ -40,14 +40,12 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabel2" max="32767" attributes="0"/>
-                                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="jTFembalagem" pref="160" max="32767" attributes="0"/>
-                                  <Component id="jTFtamanho" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel2" pref="160" max="32767" attributes="0"/>
+                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTFnomeCategoria" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jCBtamanho" max="32767" attributes="0"/>
+                                  <Component id="jCBembalagem" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -70,11 +68,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTFtamanho" min="-2" max="-2" attributes="0"/>
+              <Component id="jCBtamanho" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTFembalagem" min="-2" max="-2" attributes="0"/>
+              <Component id="jCBembalagem" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jBcadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -92,9 +90,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFnomeCategoria">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFnomeCategoriaActionPerformed"/>
       </Events>
@@ -109,26 +104,10 @@
         <Property name="text" type="java.lang.String" value="Tamanho"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTFtamanho">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField2"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFtamanhoActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tipo de Embalagem"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTFembalagem">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFembalagemActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBcadastrar">
       <Properties>
@@ -148,6 +127,40 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBcancelarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jCBtamanho">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Pequeno"/>
+            <StringItem index="1" value="M&#xe9;dio"/>
+            <StringItem index="2" value="Grande"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBtamanhoActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jCBembalagem">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Lata"/>
+            <StringItem index="1" value="Vidro"/>
+            <StringItem index="2" value="Pl&#xe1;stico"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

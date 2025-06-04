@@ -4,17 +4,30 @@
  */
 package view;
 
+import model.Categoria;
+import dao.CategoriaDao;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Pedro
  */
 public class FrmCadastroCategorias extends javax.swing.JFrame {
-
+    
+    private Categoria objetocategoria;
     /**
      * Creates new form FrmCadastroCategorias
      */
+    
     public FrmCadastroCategorias() {
         initComponents();
+        this.objetocategoria = new Categoria();
+    }
+    
+       public class Mensagem extends Exception {
+        public Mensagem (String mensagem) {
+           super(mensagem); 
+        }
     }
 
     /**
@@ -30,18 +43,17 @@ public class FrmCadastroCategorias extends javax.swing.JFrame {
         jTFnomeCategoria = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTFtamanho = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTFembalagem = new javax.swing.JTextField();
         jBcadastrar = new javax.swing.JButton();
         jBcancelar = new javax.swing.JButton();
+        jCBtamanho = new javax.swing.JComboBox<>();
+        jCBembalagem = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Categoria");
 
         jLabel1.setText("Cadastro de Categorias");
 
-        jTFnomeCategoria.setText("jTextField1");
         jTFnomeCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFnomeCategoriaActionPerformed(evt);
@@ -52,21 +64,7 @@ public class FrmCadastroCategorias extends javax.swing.JFrame {
 
         jLabel3.setText("Tamanho");
 
-        jTFtamanho.setText("jTextField2");
-        jTFtamanho.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFtamanhoActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Tipo de Embalagem");
-
-        jTFembalagem.setText("jTextField3");
-        jTFembalagem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFembalagemActionPerformed(evt);
-            }
-        });
 
         jBcadastrar.setBackground(new java.awt.Color(102, 255, 102));
         jBcadastrar.setText("Cadastrar");
@@ -78,6 +76,20 @@ public class FrmCadastroCategorias extends javax.swing.JFrame {
 
         jBcancelar.setBackground(new java.awt.Color(255, 51, 51));
         jBcancelar.setText("Cancelar");
+        jBcancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcancelarActionPerformed(evt);
+            }
+        });
+
+        jCBtamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pequeno", "Médio", "Grande" }));
+        jCBtamanho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBtamanhoActionPerformed(evt);
+            }
+        });
+
+        jCBembalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lata", "Vidro", "Plástico" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,13 +109,12 @@ public class FrmCadastroCategorias extends javax.swing.JFrame {
                                 .addComponent(jBcadastrar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jTFembalagem, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                                    .addComponent(jTFtamanho)
-                                    .addComponent(jTFnomeCategoria))
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTFnomeCategoria)
+                                    .addComponent(jCBtamanho, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jCBembalagem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(37, 37, 37))
         );
@@ -119,11 +130,11 @@ public class FrmCadastroCategorias extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFtamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBtamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFembalagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBembalagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBcadastrar)
@@ -138,17 +149,52 @@ public class FrmCadastroCategorias extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFnomeCategoriaActionPerformed
 
-    private void jTFtamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFtamanhoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFtamanhoActionPerformed
-
-    private void jTFembalagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFembalagemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFembalagemActionPerformed
-
     private void jBcadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcadastrarActionPerformed
         // TODO add your handling code here:
+        try{
+            // Recebendo a validandodados da interface
+            String nomeCategoria = jTFnomeCategoria.getText();
+            String tamanho = (String) jCBtamanho.getSelectedItem();
+            String embalagem = (String) jCBembalagem.getSelectedItem();
+            
+            if (this.jTFnomeCategoria.getText().length() < 2) {
+                throw new Mensagem("Nome da categoria deve conter ao menos 2 caracteres");
+            } else {
+                nomeCategoria = this.jTFnomeCategoria.getText();
+            }
+            
+            
+            CategoriaDao categoriaDao = new CategoriaDao();
+            int novoId = categoriaDao.getMaiorID() + 1;
+            Categoria novaCategoria = new Categoria(novoId, nomeCategoria, tamanho, embalagem);
+            
+            if(this.objetocategoria.insertCategoriaDB(nomeCategoria, tamanho, embalagem)) {
+                JOptionPane.showMessageDialog(null, "Categoria cadastrada com sucesso");
+                
+                this.jTFnomeCategoria.setText("");
+
+                
+                      
+            }
+            System.out.println(this.objetocategoria.getListaDeCategoria().toString());
+            
+            
+            
+        } catch (Mensagem erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } catch (NumberFormatException erro2) {
+            JOptionPane.showMessageDialog(null, "Informe um número válido");
+        }
     }//GEN-LAST:event_jBcadastrarActionPerformed
+
+    private void jCBtamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBtamanhoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBtamanhoActionPerformed
+
+    private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jBcancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,12 +234,12 @@ public class FrmCadastroCategorias extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBcadastrar;
     private javax.swing.JButton jBcancelar;
+    private javax.swing.JComboBox<String> jCBembalagem;
+    private javax.swing.JComboBox<String> jCBtamanho;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTFembalagem;
     private javax.swing.JTextField jTFnomeCategoria;
-    private javax.swing.JTextField jTFtamanho;
     // End of variables declaration//GEN-END:variables
 }

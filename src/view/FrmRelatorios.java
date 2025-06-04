@@ -4,6 +4,11 @@
  */
 package view;
 
+import model.Produto;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
+import java.util.ArrayList;
+
 /**
  *
  * @author vinif
@@ -13,8 +18,35 @@ public class FrmRelatorios extends javax.swing.JFrame {
     /**
      * Creates new form FrmRelatorios
      */
+    private Produto objproduto;
+    
     public FrmRelatorios() {
         initComponents();
+        this.objproduto = new Produto();
+        this.carregaTabelaProduto();
+        
+    }
+    public class Mensagem extends Exception{
+        public Mensagem(String mensagem){
+            super(mensagem);
+        }
+    }
+    
+    public void carregaTabelaProduto() {
+        DefaultTableModel model = (DefaultTableModel) this.tbListaPreco.getModel();
+        model.setNumRows(0);
+        ArrayList<Produto> listadeproduto = objproduto.getListaDeProduto();
+        for (Produto a: listadeproduto) {
+            model.addRow(new Object[] {
+                a.getNome(),
+                a.getPrecoUnitario(),
+                a.getUnidadeMedida(),
+                a.getQuantidadeEmEstoque(),
+                a.getQuantidadeMinimaEmEstoque(),
+                a.getQuantidadeMaximaEmEstoque(),
+                a.getCategoria()
+            });
+        }
     }
 
     /**
@@ -26,21 +58,165 @@ public class FrmRelatorios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        tbAba = new javax.swing.JTabbedPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbListaPreco = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbBalanco = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tbMinimo = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tbMaximo = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tbPorCategoria = new javax.swing.JTable();
+        jBCancelar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLBtotalEstoque = new javax.swing.JLabel();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Relatórios de Estoque");
+
+        tbListaPreco.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nome do Produto", "Preço Unitário", "Unidade", "Categoria"
+            }
+        ));
+        jScrollPane2.setViewportView(tbListaPreco);
+
+        tbAba.addTab("Lista de Preçoes", jScrollPane2);
+
+        tbBalanco.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nome do Produto", "Quantidade", "Preço Unitário", "Valor Total"
+            }
+        ));
+        jScrollPane3.setViewportView(tbBalanco);
+
+        tbAba.addTab("Balanço Físico/Financeiro", jScrollPane3);
+
+        tbMinimo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nome do Produto", "Qtd. Mínima", "Qtd. em Estoque"
+            }
+        ));
+        jScrollPane4.setViewportView(tbMinimo);
+
+        tbAba.addTab("Abaixo da Quant. Min.", jScrollPane4);
+
+        tbMaximo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nome do Produto", "Qtd. Máxima", "Qtd. em Estoque"
+            }
+        ));
+        jScrollPane5.setViewportView(tbMaximo);
+
+        tbAba.addTab("Acima da Quant. Max.", jScrollPane5);
+
+        tbPorCategoria.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Categoria", "Qtd. de Produtos"
+            }
+        ));
+        jScrollPane6.setViewportView(tbPorCategoria);
+
+        tbAba.addTab("Por Categoria", jScrollPane6);
+
+        jBCancelar.setText("Cancelar");
+        jBCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCancelarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Valor Total do Estoque:");
+
+        jLBtotalEstoque.setText("TotalEstoque");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(tbAba, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBCancelar)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLBtotalEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(tbAba, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLBtotalEstoque))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addComponent(jBCancelar)
+                .addGap(51, 51, 51))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jBCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +254,21 @@ public class FrmRelatorios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBCancelar;
+    private javax.swing.JLabel jLBtotalEstoque;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTabbedPane tbAba;
+    private javax.swing.JTable tbBalanco;
+    private javax.swing.JTable tbListaPreco;
+    private javax.swing.JTable tbMaximo;
+    private javax.swing.JTable tbMinimo;
+    private javax.swing.JTable tbPorCategoria;
     // End of variables declaration//GEN-END:variables
 }

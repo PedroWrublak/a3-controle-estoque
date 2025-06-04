@@ -4,17 +4,47 @@
  */
 package view;
 
+import model.Produto;
+import model.Categoria;
+import javax.swing.JOptionPane;
+import dao.CategoriaDao;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author vinif
  */
 public class FrmCadastroProdutos extends javax.swing.JFrame {
-
+    
+    private Produto objetoproduto;
+    
     /**
      * Creates new form CadastroProdutos
      */
+    
+    private void carregarCategorias() {
+        CategoriaDao categoriaDao = new CategoriaDao();
+        
+        ArrayList<Categoria> listaDeCategoria = categoriaDao.getListaDeCategoria();
+        jCBCategoria.removeAllItems();
+        
+        for (Categoria cat : listaDeCategoria) {
+        jCBCategoria.addItem(cat);
+    }
+    }
+    
     public FrmCadastroProdutos() {
         initComponents();
+        this.objetoproduto = new Produto();
+        carregarCategorias();
+        
+    }
+    
+    public class Mensagem extends Exception {
+        public Mensagem (String mensagem) {
+           super(mensagem); 
+        }
     }
 
     /**
@@ -32,7 +62,7 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
         JLNome = new javax.swing.JLabel();
         JLCategoria = new javax.swing.JLabel();
         JLEstoque = new javax.swing.JLabel();
-        jTFPreco = new javax.swing.JTextField();
+        jTFPrecoUnitario = new javax.swing.JTextField();
         JLPreco = new javax.swing.JLabel();
         jTFEstoque = new javax.swing.JTextField();
         jBCadastrar = new javax.swing.JButton();
@@ -42,7 +72,9 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         JLEstoqueMax = new javax.swing.JLabel();
         jTFEstoqueMax = new javax.swing.JTextField();
-        jTFCategoria = new javax.swing.JComboBox<>();
+        jCBCategoria = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jTFUnidadeMedida = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
 
@@ -64,13 +96,13 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 
         JLEstoque.setText("Quantidade em Estoque ");
 
-        jTFPreco.addActionListener(new java.awt.event.ActionListener() {
+        jTFPrecoUnitario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFPrecoActionPerformed(evt);
+                jTFPrecoUnitarioActionPerformed(evt);
             }
         });
 
-        JLPreco.setText("Preço ");
+        JLPreco.setText("Preço Unitário ");
 
         jBCadastrar.setText("Cadastrar ");
         jBCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +128,21 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 
         JLEstoqueMax.setText("Quantidade Máxima");
 
-        jTFCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        DefaultComboBoxModel<Categoria> modeloCategoria = new DefaultComboBoxModel<>();
+        jCBCategoria.setModel(modeloCategoria);
+        jCBCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBCategoriaActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Unidade de Medida");
+
+        jTFUnidadeMedida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFUnidadeMedidaActionPerformed(evt);
+            }
+        });
 
         jMenuBar1.add(jMenu2);
 
@@ -107,34 +153,38 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(jBCancelar)
-                        .addGap(82, 82, 82)
-                        .addComponent(jBCadastrar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFNome, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                            .addComponent(JLNome)
-                            .addComponent(JLCategoria)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(108, 108, 108)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JLEstoqueMin)
-                            .addComponent(JLEstoqueMax)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTFEstoqueMin, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTFEstoqueMax, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(JLPreco, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTFEstoque, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTFPreco, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
-                            .addComponent(JLEstoque)
-                            .addComponent(jTFCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(126, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTFNome, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                                .addComponent(jTFEstoqueMax, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                                .addComponent(jTFEstoque)
+                                .addComponent(jTFPrecoUnitario, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                                .addComponent(jCBCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTFUnidadeMedida)
+                                .addComponent(jTFEstoqueMin)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(JLNome)
+                                        .addComponent(JLCategoria)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(108, 108, 108)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(JLEstoqueMax)
+                                        .addComponent(JLPreco)
+                                        .addComponent(JLEstoque)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
+                        .addContainerGap(161, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jBCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBCadastrar)
+                        .addGap(83, 83, 83))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,32 +195,41 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
                 .addComponent(JLNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(JLCategoria)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
                 .addComponent(JLPreco)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTFPrecoUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFUnidadeMedida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(JLCategoria)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCBCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JLEstoque)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(JLEstoqueMin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JLEstoqueMin)
+                .addGap(4, 4, 4)
                 .addComponent(jTFEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JLEstoqueMax)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFEstoqueMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBCancelar)
-                    .addComponent(jBCadastrar)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTFEstoqueMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jBCadastrar)
+                            .addComponent(jBCancelar))
+                        .addGap(19, 19, 19))))
         );
 
         pack();
@@ -182,11 +241,82 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
 
     private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
         // TODO add your handling code here:
+        try{
+            // Recebendo a validandodados da interface
+            String nomeProduto = "";
+            double preco = 0;
+            String unidadeMedida = "";
+            int qtdEstoque = 0;
+            int qtdMinima = 0;
+            int qtdMaxima = 0;
+            Categoria categoria = null;
+            
+            if (this.jTFNome.getText().length() < 2) {
+                throw new Mensagem("Nome deve conter ao menos 2 caracteres");
+            } else {
+                nomeProduto = this.jTFNome.getText();
+            }
+            
+            if (this.jTFPrecoUnitario.getText().length() <= 0) {
+                throw new Mensagem("Preço deve ser número e maior que zero");
+            } else {
+                preco = Double.parseDouble(this.jTFPrecoUnitario.getText());
+            }
+            
+            if (this.jTFUnidadeMedida.getText().isEmpty()) {
+            throw new Mensagem("Unidade de medida deve ser informada");
+            } else {
+            unidadeMedida = this.jTFUnidadeMedida.getText();
+            }
+            
+            if (this.jTFEstoque.getText().length() <= 0) {
+                throw new Mensagem("Estoque deve ser número e maior que zero");
+            } else {
+                qtdEstoque = Integer.parseInt(this.jTFEstoque.getText());
+            }
+            
+            if (this.jTFEstoqueMin.getText().length() <= 0) {
+                throw new Mensagem("Estoque Min. deve ser número e maior que zero");
+            } else {
+                qtdMinima = Integer.parseInt(this.jTFEstoqueMin.getText());
+            }
+            
+            if (this.jTFEstoqueMax.getText().length() <= 0) {
+                throw new Mensagem("Estoque Max. deve ser número e maior que zero");
+            } else {
+                qtdMaxima = Integer.parseInt(this.jTFEstoqueMax.getText());
+            }
+            
+            categoria = (Categoria) this.jCBCategoria.getSelectedItem();
+            if (categoria == null) {
+                throw new Mensagem("Categoria deve ser selecionada");
+            }
+            
+            if(this.objetoproduto.insertProdutoDB(nomeProduto, preco, unidadeMedida, qtdEstoque, qtdMinima, qtdMaxima, categoria)) {
+                JOptionPane.showMessageDialog(null, "Produto Cadastrado com sucesso");
+                
+                this.jTFNome.setText("");
+                this.jTFPrecoUnitario.setText("");
+                this.jTFEstoque.setText("");
+                this.jTFEstoqueMin.setText("");
+                this.jTFEstoqueMax.setText("");
+                
+                      
+            }
+            System.out.println(this.objetoproduto.getListaDeProduto().toString());
+            
+            
+        } catch (Mensagem erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } catch (NumberFormatException erro2) {
+            JOptionPane.showMessageDialog(null, "Informe um número válido");
+        }
+        
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
-    private void jTFPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFPrecoActionPerformed
+    private void jTFPrecoUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFPrecoUnitarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFPrecoActionPerformed
+    }//GEN-LAST:event_jTFPrecoUnitarioActionPerformed
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
         // TODO add your handling code here:
@@ -195,6 +325,14 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
     private void jTFEstoqueMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEstoqueMinActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFEstoqueMinActionPerformed
+
+    private void jTFUnidadeMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFUnidadeMedidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFUnidadeMedidaActionPerformed
+
+    private void jCBCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,16 +379,18 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
     private javax.swing.JLabel JLPreco;
     private javax.swing.JButton jBCadastrar;
     private javax.swing.JButton jBCancelar;
+    private javax.swing.JComboBox<Categoria> jCBCategoria;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JComboBox<String> jTFCategoria;
     private javax.swing.JTextField jTFEstoque;
     private javax.swing.JTextField jTFEstoqueMax;
     private javax.swing.JTextField jTFEstoqueMin;
     private javax.swing.JTextField jTFNome;
-    private javax.swing.JTextField jTFPreco;
+    private javax.swing.JTextField jTFPrecoUnitario;
+    private javax.swing.JTextField jTFUnidadeMedida;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

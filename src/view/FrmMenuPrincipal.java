@@ -70,6 +70,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuEntradaSaida);
 
         jMenuRelatorios.setText("Relatórios ");
+        jMenuRelatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuRelatoriosActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuRelatorios);
 
         jMenuSair.setText("Sair");
@@ -112,16 +117,23 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCategoriasActionPerformed
         // TODO add your handling code here:
+        FrmCadastroCategorias objeto = new FrmCadastroCategorias();
+        objeto.setVisible(true);
     }//GEN-LAST:event_jMenuCategoriasActionPerformed
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jMenuSairActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
        FrmCadastroProduto objeto = new FrmCadastroProduto();
-objeto.setVisible(true);
+        objeto.setVisible(true);
     }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenuRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelatoriosActionPerformed
+        FrmRelatorios objeto = new FrmRelatorios();
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuRelatoriosActionPerformed
 
     /**
      * @param args the command line arguments
