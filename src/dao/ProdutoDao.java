@@ -178,7 +178,7 @@ public class ProdutoDao {
         try{
             Statement statement = this.getConnection().createStatement();
 
-            ResultSet resultSet = statement.executeQuery("select p.nome_produto, p.quantidade_estoque, " +
+            ResultSet resultSet = statement.executeQuery("select p.nome_produto, p.quantidade_estoque, p.preco_unitario," +
                     "(p.preco_unitario * p.quantidade_estoque) as valor_total_produto, " +
                     "(select sum(preco_unitario * quantidade_estoque) from tb_produto) " +
                     "as valor_total_geral from tb_produto p order by p.nome_produto");
@@ -186,12 +186,15 @@ public class ProdutoDao {
             while(resultSet.next()) {
                 String nome = resultSet.getString("nome_produto");
                 int quantidadeEmEtoque = resultSet.getInt("quantidade_estoque");
+                double precoUnitario = resultSet.getDouble("preco_unitario");
                 double valorTotalDeUmProduto = resultSet.getDouble("valor_total_produto");
                 double valorGeralDoEstoque = resultSet.getDouble("valor_total_geral");
-
+                
+                
                 Produto produto = new Produto();
                 produto.setNome(nome);
                 produto.setQuantidadeEmEstoque(quantidadeEmEtoque);
+                produto.setPrecoUnitario(precoUnitario);
                 produto.setValorTotalDeUmProduto(valorTotalDeUmProduto);
                 produto.setValorGeralDoEstoque(valorGeralDoEstoque);
                 listaBalancoFisicoFinanceiro.add(produto);

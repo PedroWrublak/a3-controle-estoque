@@ -5,6 +5,11 @@
 package view;
 
 import model.Produto;
+import model.Categoria;
+import model.Movimentacao;
+import dao.ProdutoDao;
+import dao.CategoriaDao;
+import dao.MovimentacaoDao;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
@@ -24,6 +29,7 @@ public class FrmRelatorios extends javax.swing.JFrame {
         initComponents();
         this.objproduto = new Produto();
         this.carregaTabelaProduto();
+        this.carregaTabelaBalanco();
         
     }
     public class Mensagem extends Exception{
@@ -41,10 +47,25 @@ public class FrmRelatorios extends javax.swing.JFrame {
                 a.getNome(),
                 a.getPrecoUnitario(),
                 a.getUnidadeMedida(),
+                a.getNomeCategoria()
+            });
+        }
+    }
+    
+    public void carregaTabelaBalanco() {
+        
+        DefaultTableModel model = (DefaultTableModel) this.tbBalanco.getModel();
+  
+        model.setNumRows(0);
+        ArrayList<Produto> balancofisicofinanceiro = objproduto.getBalancoFisicoFinanceiro();
+        for (Produto a: balancofisicofinanceiro) {
+
+            model.addRow(new Object[] {
+                a.getNome(),
                 a.getQuantidadeEmEstoque(),
-                a.getQuantidadeMinimaEmEstoque(),
-                a.getQuantidadeMaximaEmEstoque(),
-                a.getCategoria()
+                a.getPrecoUnitario(),
+                a.getValorTotalDeUmProduto()
+               
             });
         }
     }
