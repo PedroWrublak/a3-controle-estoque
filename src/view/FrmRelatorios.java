@@ -30,6 +30,10 @@ public class FrmRelatorios extends javax.swing.JFrame {
         this.objproduto = new Produto();
         this.carregaTabelaProduto();
         this.carregaTabelaBalanco();
+        this.carregarTabelaMinimo();
+        this.carregarTabelaMaximo();
+        this.carregarTabelaPorCategoria();
+        this.atualizarValorEstoque();
         
     }
     public class Mensagem extends Exception{
@@ -65,9 +69,58 @@ public class FrmRelatorios extends javax.swing.JFrame {
                 a.getQuantidadeEmEstoque(),
                 a.getPrecoUnitario(),
                 a.getValorTotalDeUmProduto()
-               
             });
         }
+    }
+    
+    public void carregarTabelaMinimo() {
+        DefaultTableModel model = (DefaultTableModel) this.tbMinimo.getModel();
+        
+        model.setNumRows(0);
+        ArrayList<Produto> abaixoquantidademinima = objproduto.getQuantidadeEstoqueAbaixoQuantidadeMinima();
+        for (Produto a: abaixoquantidademinima) {
+            
+            model.addRow(new Object[] {
+                a.getNome(),
+                a.getQuantidadeMinimaEmEstoque(),
+                a.getQuantidadeEmEstoque()
+            });
+        }
+    }
+    
+    public void carregarTabelaMaximo() {
+        DefaultTableModel model = (DefaultTableModel) this.tbMaximo.getModel();
+        
+        model.setNumRows(0);
+        ArrayList<Produto> acimaquantidademaxima = objproduto.getListaAcimaQuantidadeMaxima();
+        for (Produto a: acimaquantidademaxima) {
+            
+            model.addRow(new Object[] {
+                a.getNome(),
+                a.getQuantidadeMaximaEmEstoque(),
+                a.getQuantidadeEmEstoque()
+            });
+        }
+    }
+    
+    public void carregarTabelaPorCategoria() {
+        DefaultTableModel model = (DefaultTableModel) this.tbPorCategoria.getModel();
+        
+        model.setNumRows(0);
+        ArrayList<Produto> porcategoria = objproduto.getRelatorioQuantidadeDeProdutoPorCategoria();
+        for (Produto a: porcategoria) {
+            
+            model.addRow(new Object[] {
+                a.getNomeCategoria(),
+                a.getQuantidadeDeProdutoPorCategoria()      
+            });
+        }
+    }
+    
+    public void atualizarValorEstoque() {
+        ProdutoDao produtoDao = new ProdutoDao();
+        double totalGeral = produtoDao.getValorGeralDoEstoque();
+        jLBtotalEstoque.setText(String.format("R$ %.2f", totalGeral));
     }
 
     /**
@@ -195,8 +248,6 @@ public class FrmRelatorios extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Valor Total do Estoque:");
-
-        jLBtotalEstoque.setText("TotalEstoque");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

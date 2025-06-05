@@ -81,6 +81,7 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
         jTextField2.setText("jTextField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jTFNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +119,7 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
             }
         });
 
-        JLEstoqueMin.setText("Quantidade mínima ");
+        JLEstoqueMin.setText("Quantidade Mínima ");
 
         jTFEstoqueMin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,19 +167,16 @@ public class FrmCadastroProdutos extends javax.swing.JFrame {
                                 .addComponent(jCBCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTFUnidadeMedida)
                                 .addComponent(jTFEstoqueMin)
+                                .addComponent(JLNome)
+                                .addComponent(JLCategoria)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(JLNome)
-                                        .addComponent(JLCategoria)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(108, 108, 108)
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(JLEstoqueMax)
-                                        .addComponent(JLPreco)
-                                        .addComponent(JLEstoque)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
+                                    .addGap(108, 108, 108)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(JLEstoqueMax)
+                                .addComponent(JLPreco)
+                                .addComponent(JLEstoque)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2)))
                         .addContainerGap(161, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jBCancelar)

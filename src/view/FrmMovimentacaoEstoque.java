@@ -58,6 +58,7 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         JLMovimentacaoEstoque = new javax.swing.JLabel();
         jCBProduto = new javax.swing.JComboBox<>();
         JLProduto = new javax.swing.JLabel();
@@ -67,7 +68,7 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
         JLTipo = new javax.swing.JLabel();
         JRSaida = new javax.swing.JRadioButton();
         JREntrada = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        jBCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Movimentação Estoque");
@@ -76,6 +77,11 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
 
         DefaultComboBoxModel<Produto> modeloProduto = new DefaultComboBoxModel<>();
         jCBProduto.setModel(modeloProduto);
+        jCBProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBProdutoActionPerformed(evt);
+            }
+        });
 
         JLProduto.setText("Produto: ");
 
@@ -96,14 +102,16 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
 
         JLTipo.setText("Tipo:");
 
+        buttonGroup1.add(JRSaida);
         JRSaida.setText("Saída");
 
+        buttonGroup1.add(JREntrada);
         JREntrada.setText("Entrada");
 
-        jButton1.setText("Cancelar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBCancelar.setText("Cancelar");
+        jBCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBCancelarActionPerformed(evt);
             }
         });
 
@@ -133,7 +141,7 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
                 .addContainerGap(146, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(70, 70, 70)
-                .addComponent(jButton1)
+                .addComponent(jBCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(JCConfirmar)
                 .addGap(69, 69, 69))
@@ -159,7 +167,7 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JCConfirmar)
-                    .addComponent(jButton1))
+                    .addComponent(jBCancelar))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
@@ -183,6 +191,8 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
             }
             
             int quantidadeAtual = produto.getQuantidadeEmEstoque();
+            int quantidadeMinima = produto.getQuantidadeMinimaEmEstoque();
+            int quantidadeMaxima = produto.getQuantidadeMaximaEmEstoque();
             String tipoMovimentacao = JREntrada.isSelected() ? "Entrada" : JRSaida.isSelected() ? "Saída" : "";
             int novaQuantidade;
             LocalDate dataMovimentacao = LocalDate.now();
@@ -194,11 +204,18 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
             
             if (tipoMovimentacao.equals("Entrada")) {
                 novaQuantidade = quantidadeAtual + quantidade;
+                if (quantidadeAtual > quantidadeMaxima) {
+                    JOptionPane.showMessageDialog(null, "Quantidade acima da quantidade máxima");
+                }
+                
             } else if (tipoMovimentacao.equals("Saída")) {
                 if (quantidade > quantidadeAtual) {
                     throw new Mensagem("Quantidade insuficiente em estoque.");
                 }
                 novaQuantidade = quantidadeAtual - quantidade;
+                if (quantidadeAtual < quantidadeMinima) {
+                    JOptionPane.showMessageDialog(null, "Quantidade abaixo da quantidade mínima.");
+                }
             } else {
                 throw new Mensagem("Tipo de movimentação inválido.");
             }
@@ -211,9 +228,6 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
                 
                 JOptionPane.showMessageDialog(null, "Alteração feita com sucesso");      
             }
-      
-            System.out.println(this.objetoproduto.getListaDeProduto().toString());
-            
             
         } catch (Mensagem erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
@@ -226,10 +240,14 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JTQuantidadeActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBCancelarActionPerformed
+
+    private void jCBProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,7 +296,8 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
     private javax.swing.JRadioButton JREntrada;
     private javax.swing.JRadioButton JRSaida;
     private javax.swing.JTextField JTQuantidade;
-    private javax.swing.JButton jButton1;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jBCancelar;
     private javax.swing.JComboBox<Produto> jCBProduto;
     // End of variables declaration//GEN-END:variables
 }

@@ -359,9 +359,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLBtotalEstoque">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="TotalEstoque"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

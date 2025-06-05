@@ -36,6 +36,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuEntradaSaidaActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuAlterarProduto">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Alterar Produto"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuAlterarProdutoActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuRelatorios">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rios "/>

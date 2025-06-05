@@ -31,6 +31,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuProdutos = new javax.swing.JMenuItem();
         jMenuCategorias = new javax.swing.JMenuItem();
         jMenuEntradaSaida = new javax.swing.JMenuItem();
+        jMenuAlterarProduto = new javax.swing.JMenuItem();
         jMenuRelatorios = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -68,6 +69,14 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuEntradaSaida);
+
+        jMenuAlterarProduto.setText("Alterar Produto");
+        jMenuAlterarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAlterarProdutoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuAlterarProduto);
 
         jMenuRelatorios.setText("Relatórios ");
         jMenuRelatorios.addActionListener(new java.awt.event.ActionListener() {
@@ -107,19 +116,22 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProdutosActionPerformed
-        FrmCadastroProdutos objeto = new FrmCadastroProdutos();        // TODO add your handling code here:
+        FrmCadastroProdutos objeto = new FrmCadastroProdutos();
+        objeto.setLocationRelativeTo(null);
         objeto.setVisible(true);
     }//GEN-LAST:event_jMenuProdutosActionPerformed
 
     private void jMenuEntradaSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEntradaSaidaActionPerformed
         // TODO add your handling code here:
         FrmMovimentacaoEstoque objeto = new FrmMovimentacaoEstoque();
+        objeto.setLocationRelativeTo(null);
         objeto.setVisible(true);
     }//GEN-LAST:event_jMenuEntradaSaidaActionPerformed
 
     private void jMenuCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCategoriasActionPerformed
         // TODO add your handling code here:
         FrmCadastroCategorias objeto = new FrmCadastroCategorias();
+         objeto.setLocationRelativeTo(null);
         objeto.setVisible(true);
     }//GEN-LAST:event_jMenuCategoriasActionPerformed
 
@@ -134,8 +146,16 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelatoriosActionPerformed
         FrmRelatorios objeto = new FrmRelatorios();
+        objeto.setLocationRelativeTo(null);
         objeto.setVisible(true);
     }//GEN-LAST:event_jMenuRelatoriosActionPerformed
+
+    private void jMenuAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAlterarProdutoActionPerformed
+        // TODO add your handling code here:
+        FrmAlterarProduto objeto = new FrmAlterarProduto();
+        objeto.setLocationRelativeTo(null);
+        objeto.setVisible(true);
+    }//GEN-LAST:event_jMenuAlterarProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,6 +195,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem jMenuAlterarProduto;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuCategorias;
     private javax.swing.JMenuItem jMenuEntradaSaida;

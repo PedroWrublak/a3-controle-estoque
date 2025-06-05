@@ -207,6 +207,26 @@ public class ProdutoDao {
         }
         return listaBalancoFisicoFinanceiro;
     }
+    
+      public double getValorGeralDoEstoque() {
+        double total = 0.0;
+
+        try {
+            Statement statement = this.getConnection().createStatement();
+            ResultSet rs = statement.executeQuery(
+                "SELECT SUM(preco_unitario * quantidade_estoque) AS total FROM tb_produto"
+            );
+
+            if (rs.next()) {
+                total = rs.getDouble("total");
+            }
+            rs.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
 
     // Retorna uma lista com os produtos que estão com a quantidade em estoque abaixo da quantidade mínima
     public ArrayList<Produto> getQuantidadeEstoqueAbaixoQuantidadeMinima(){
