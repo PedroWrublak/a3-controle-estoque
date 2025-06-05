@@ -113,6 +113,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuEntradaSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEntradaSaidaActionPerformed
         // TODO add your handling code here:
+        FrmMovimentacaoEstoque objeto = new FrmMovimentacaoEstoque();
+        objeto.setVisible(true);
     }//GEN-LAST:event_jMenuEntradaSaidaActionPerformed
 
     private void jMenuCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCategoriasActionPerformed

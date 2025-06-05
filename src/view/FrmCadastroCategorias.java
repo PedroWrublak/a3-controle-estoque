@@ -66,7 +66,6 @@ public class FrmCadastroCategorias extends javax.swing.JFrame {
 
         jLabel4.setText("Tipo de Embalagem");
 
-        jBcadastrar.setBackground(new java.awt.Color(102, 255, 102));
         jBcadastrar.setText("Cadastrar");
         jBcadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,8 +73,12 @@ public class FrmCadastroCategorias extends javax.swing.JFrame {
             }
         });
 
-        jBcancelar.setBackground(new java.awt.Color(255, 51, 51));
         jBcancelar.setText("Cancelar");
+        jBcancelar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jBcancelarFocusGained(evt);
+            }
+        });
         jBcancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBcancelarActionPerformed(evt);
@@ -195,6 +198,10 @@ public class FrmCadastroCategorias extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jBcancelarActionPerformed
+
+    private void jBcancelarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jBcancelarFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBcancelarFocusGained
 
     /**
      * @param args the command line arguments
