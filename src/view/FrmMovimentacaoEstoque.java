@@ -4,17 +4,49 @@
  */
 package view;
 
+import model.Produto;
+import model.Categoria;
+import javax.swing.JOptionPane;
+import dao.CategoriaDao;
+import dao.MovimentacaoDao;
+import model.Movimentacao;
+import dao.ProdutoDao;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author vinif
  */
 public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
-
+    
+    private Produto objetoproduto;
+    private Movimentacao objetomovimentacao;
     /**
      * Creates new form FrmEntradas
      */
+    
+    private void carregarProdutos() {
+        ProdutoDao produtoDao = new ProdutoDao();
+        
+        ArrayList<Produto> listaDeProduto = produtoDao.getListaDeProduto();
+        jCBProduto.removeAllItems();
+        
+        for (Produto cat : listaDeProduto) {
+        jCBProduto.addItem(cat);
+    }
+    }
     public FrmMovimentacaoEstoque() {
         initComponents();
+        this.objetomovimentacao = new Movimentacao();
+        carregarProdutos();
+    }
+    
+     public class Mensagem extends Exception {
+        public Mensagem (String mensagem) {
+           super(mensagem); 
+        }
     }
 
     /**
@@ -27,7 +59,7 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
     private void initComponents() {
 
         JLMovimentacaoEstoque = new javax.swing.JLabel();
-        JCProduto = new javax.swing.JComboBox<>();
+        jCBProduto = new javax.swing.JComboBox<>();
         JLProduto = new javax.swing.JLabel();
         JTQuantidade = new javax.swing.JTextField();
         JLQuantidade = new javax.swing.JLabel();
@@ -35,13 +67,15 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
         JLTipo = new javax.swing.JLabel();
         JRSaida = new javax.swing.JRadioButton();
         JREntrada = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Movimentação Estoque");
 
         JLMovimentacaoEstoque.setText("Movimentação do Estoque ");
 
-        JCProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        DefaultComboBoxModel<Produto> modeloProduto = new DefaultComboBoxModel<>();
+        jCBProduto.setModel(modeloProduto);
 
         JLProduto.setText("Produto: ");
 
@@ -66,6 +100,13 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
 
         JREntrada.setText("Entrada");
 
+        jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,15 +124,19 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
                             .addComponent(JLProduto))
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(JCConfirmar)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(JRSaida)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(JREntrada)))
-                            .addComponent(JCProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(JRSaida)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(JREntrada))
+                            .addComponent(jCBProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(JTQuantidade))))
                 .addContainerGap(146, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JCConfirmar)
+                .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,7 +145,7 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
                 .addComponent(JLMovimentacaoEstoque)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JCProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JLProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -112,7 +157,9 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
                     .addComponent(JLQuantidade)
                     .addComponent(JTQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
-                .addComponent(JCConfirmar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JCConfirmar)
+                    .addComponent(jButton1))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
@@ -121,11 +168,68 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
 
     private void JCConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCConfirmarActionPerformed
         // TODO add your handling code here:
+        try{
+            // Recebendo a validandodados da interface
+            
+
+            Produto produto = (Produto) this.jCBProduto.getSelectedItem();
+            if (produto == null) {
+                throw new Mensagem("Produto deve ser selecionado");
+            }
+            
+            int quantidade = Integer.parseInt(JTQuantidade.getText());
+            if (quantidade <=0) {
+                throw new Mensagem("A quantidade deve ser maior que zero.");
+            }
+            
+            int quantidadeAtual = produto.getQuantidadeEmEstoque();
+            String tipoMovimentacao = JREntrada.isSelected() ? "Entrada" : JRSaida.isSelected() ? "Saída" : "";
+            int novaQuantidade;
+            LocalDate dataMovimentacao = LocalDate.now();
+            
+            if (tipoMovimentacao.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Selecione o tipo de movimentação.");
+                return;
+            }           
+            
+            if (tipoMovimentacao.equals("Entrada")) {
+                novaQuantidade = quantidadeAtual + quantidade;
+            } else if (tipoMovimentacao.equals("Saída")) {
+                if (quantidade > quantidadeAtual) {
+                    throw new Mensagem("Quantidade insuficiente em estoque.");
+                }
+                novaQuantidade = quantidadeAtual - quantidade;
+            } else {
+                throw new Mensagem("Tipo de movimentação inválido.");
+            }
+            
+            MovimentacaoDao movimentacaoDao = new MovimentacaoDao();
+            if(this.objetomovimentacao.insertMovimentacaoDB(tipoMovimentacao, quantidade ,dataMovimentacao, produto)) {
+                produto.setQuantidadeEmEstoque(novaQuantidade);
+                ProdutoDao produtoDao = new ProdutoDao();
+                produtoDao.atualizarQuantidadeEstoque(produto);
+                
+                JOptionPane.showMessageDialog(null, "Alteração feita com sucesso");      
+            }
+      
+            System.out.println(this.objetoproduto.getListaDeProduto().toString());
+            
+            
+        } catch (Mensagem erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } catch (NumberFormatException erro2) {
+            JOptionPane.showMessageDialog(null, "Informe um número válido");
+        }
     }//GEN-LAST:event_JCConfirmarActionPerformed
 
     private void JTQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTQuantidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTQuantidadeActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,7 +271,6 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JCConfirmar;
-    private javax.swing.JComboBox<String> JCProduto;
     private javax.swing.JLabel JLMovimentacaoEstoque;
     private javax.swing.JLabel JLProduto;
     private javax.swing.JLabel JLQuantidade;
@@ -175,5 +278,7 @@ public class FrmMovimentacaoEstoque extends javax.swing.JFrame {
     private javax.swing.JRadioButton JREntrada;
     private javax.swing.JRadioButton JRSaida;
     private javax.swing.JTextField JTQuantidade;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<Produto> jCBProduto;
     // End of variables declaration//GEN-END:variables
 }
